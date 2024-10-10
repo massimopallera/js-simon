@@ -1,7 +1,11 @@
 
 const n = document.getElementById('numbers')
-const timerEl = document.getElementById('timer')
 
+const formContainer = document.getElementById('formContainer')
+const numbContainer = document.getElementById('numbersContainer')
+
+const timerEl = document.getElementById('timer')
+const formEl = document.getElementById('formInputNumbers')
 //create 5 random numbers
 const randoms = (maxCont=5) => {
   let arr = []
@@ -14,23 +18,20 @@ const randoms = (maxCont=5) => {
 
 n.innerHTML = printRandoms(randoms())
 
-const maxTime = 30
+const maxTime = 1
 
   let time = 0
   let timeValue = `${time}%`
   let clock = setInterval(function(){
     if (time == maxTime){
+
+      //stop and clear the timer
       clearInterval(clock)
-      // btnUp.disabled = false
-      // btnUp.innerText = 'Upload'
-      // msg.classList.remove('d-none')
-      
-      // setTimeout(function(){
-      //   timeValue = ''
-      //   progressBar.innerText = progressValue
-      //   progressBar.style.width = progressValue
-      //   msg.classList.add('d-none')
-      // },5000)
+      numbContainer.classList.add('d-none') //hide the numbers and the timer
+      formContainer.classList.remove('d-none') //display form
+
+      formEl.innerHTML = addInputsInForm()
+
 
     } else {
       timeValue = `${++time}s`
@@ -50,6 +51,20 @@ function printRandoms(arr){
     markup += 
     `
       <div>${arr[i]}</div>
+    `
+  }
+  return markup
+}
+
+function addInputsInForm(){
+  let markup = ``
+  for (let i = 0; i < 5; i++) {
+    markup += `
+    <div class="mb-3">
+      <label for="${i}" class="form-label">Inserisci numero</label>
+      <input type="number" class="form-control" name="${i}" id="${i}" aria-describedby=""
+        placeholder="Inserisci un numero" />
+    </div>
     `
   }
   return markup
