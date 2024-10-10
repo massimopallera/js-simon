@@ -4,6 +4,7 @@ const n = document.getElementById('numbers')
 const formContainer = document.getElementById('formContainer')
 const numbContainer = document.getElementById('numbersContainer')
 
+const printResultsEl = document.getElementById('endGame')
 const timerEl = document.getElementById('timer')
 const formEl = document.getElementById('formInputNumbers')
 //create 5 random numbers
@@ -63,12 +64,14 @@ formEl.addEventListener('submit', function(e) {
   }
 
   const guesses = isEqual(inputs(), randoms)
-
+  let msg
   if (guesses.length != 0){
-    console.log(`Numero indovinati: ${guesses.length}\nNumeri indovinati: ${guesses}`);
+    msg = `Numero indovinati: ${guesses.length}<br>Numeri indovinati: ${guesses}`
   } else {
-    console.log('Non sono stati indovinati numeri');
+    msg = 'Non sono stati indovinati numeri'
   }
+  printResultsEl.innerHTML = msg
+
 })
 
 
