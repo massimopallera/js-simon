@@ -62,15 +62,13 @@ formEl.addEventListener('submit', function(e) {
     return array
   }
 
-  if (hasWin(inputs(),randoms)){
-    console.log('HAI VINTO');
-  } else {
-    console.log('HAI PERSO');
-    
-  }
-  
+  const guesses = isEqual(inputs(), randoms)
 
-  
+  if (guesses.length != 0){
+    console.log(`Numero indovinati: ${guesses.length}\nNumeri indovinati: ${guesses}`);
+  } else {
+    console.log('Non sono stati indovinati numeri');
+  }
 })
 
 
@@ -105,20 +103,20 @@ function addInputsInForm(){
  * @param {array} arr1 
  * @param {array} arr2 
  */
-function hasWin(arr1,arr2){
+function isEqual(arr1,arr2){
+  let newArray = []
   while (arr1.length > 0){
     const index = arr2.indexOf(arr1[0])
+    
     if (index != -1){
+      newArray.push(arr1[0])
 
       arr2.splice(index,1)
       arr1.shift()
-      // console.log(index,arr2,arr1);
-
+      console.log(index,arr2,arr1);
     } else {
-      // console.log(index);
-      return false
-      
+      arr1.shift()
     }
   }
-  return true
+  return newArray
 }
