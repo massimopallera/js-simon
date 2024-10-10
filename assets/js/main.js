@@ -1,6 +1,6 @@
 
 const n = document.getElementById('numbers')
-
+const timerEl = document.getElementById('timer')
 
 //create 5 random numbers
 const randoms = (maxCont=5) => {
@@ -13,6 +13,35 @@ const randoms = (maxCont=5) => {
 }
 
 n.innerHTML = printRandoms(randoms())
+
+const maxTime = 30
+
+  let time = 0
+  let timeValue = `${time}%`
+  let clock = setInterval(function(){
+    if (time == maxTime){
+      clearInterval(clock)
+      // btnUp.disabled = false
+      // btnUp.innerText = 'Upload'
+      // msg.classList.remove('d-none')
+      
+      // setTimeout(function(){
+      //   timeValue = ''
+      //   progressBar.innerText = progressValue
+      //   progressBar.style.width = progressValue
+      //   msg.classList.add('d-none')
+      // },5000)
+
+    } else {
+      timeValue = `${++time}s`
+      timerEl.innerText = timeValue
+      timerEl.style.width = timeValue
+      
+    }
+
+},1000)
+
+
 
 //prints the random numbers array
 function printRandoms(arr){
