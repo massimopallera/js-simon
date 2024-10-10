@@ -7,7 +7,7 @@ const numbContainer = document.getElementById('numbersContainer')
 const timerEl = document.getElementById('timer')
 const formEl = document.getElementById('formInputNumbers')
 //create 5 random numbers
-const randoms = (maxCont=5) => {
+function getRandoms (maxCont = 5){
   let arr = []
   for (let i = 0; i < maxCont; i++){
     const n = Math.floor(Math.random() * 10) + 1
@@ -16,7 +16,12 @@ const randoms = (maxCont=5) => {
   return arr
 }
 
-n.innerHTML = printRandoms(randoms())
+
+const randoms = getRandoms()
+
+console.log(randoms)
+
+n.innerHTML = printRandoms(randoms)
 
 const maxTime = 1
 
@@ -42,24 +47,29 @@ let clock = setInterval(function(){
 },1000)
 
 
-
 formEl.addEventListener('submit', function(e) {
   e.preventDefault();
 
+
+  //take the inputs and put them into the array
   const inputs = () =>  {
     let array = []
-
-    //to fix
     for (let i = 1; i <= 5; i++) {
-      const element = document.getElementById(`number${i}`).value
+      const element = Number(document.getElementById(`number${i}`).value)
       console.log(element);
       array.push(element)
     }
-
     return array
   }
 
-  console.log(inputs());
+  if (hasWin(inputs(),randoms)){
+    console.log('HAI VINTO');
+  } else {
+    console.log('HAI PERSO');
+    
+  }
+  
+
   
 })
 
@@ -88,4 +98,27 @@ function addInputsInForm(){
     `
   }
   return markup
+}
+
+/**
+ * 
+ * @param {array} arr1 
+ * @param {array} arr2 
+ */
+function hasWin(arr1,arr2){
+  while (arr1.length > 0){
+    const index = arr2.indexOf(arr1[0])
+    if (index != -1){
+
+      arr2.splice(index,1)
+      arr1.shift()
+      // console.log(index,arr2,arr1);
+
+    } else {
+      // console.log(index);
+      return false
+      
+    }
+  }
+  return true
 }
