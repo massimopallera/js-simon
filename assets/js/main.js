@@ -24,7 +24,7 @@ console.log(randoms)
 
 n.innerHTML = printRandoms(randoms)
 
-const maxTime = 1
+const maxTime = 30
 
 let time = 0
 let timeValue = `${time}%`
